@@ -11,9 +11,9 @@ const pageQueryParamSchema = z
   .transform(Number)
   .pipe(z.number().min(1))
 
-type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
-
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema)
+
+type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 
 @Controller('/questions')
 export class FetchRecentQuestionsController {
@@ -21,6 +21,8 @@ export class FetchRecentQuestionsController {
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
+    console.log(page)
+
     const result = await this.fetchRecentQuestions.execute({
       page,
     })
