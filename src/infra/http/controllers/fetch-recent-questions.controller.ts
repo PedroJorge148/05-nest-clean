@@ -21,8 +21,6 @@ export class FetchRecentQuestionsController {
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
-    console.log(page)
-
     const result = await this.fetchRecentQuestions.execute({
       page,
     })

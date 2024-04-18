@@ -37,7 +37,7 @@ export class CreateQuestionController {
       title,
       content,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds: [], // TODO: Edit attachments
     })
 
     if (result.isLeft()) {
