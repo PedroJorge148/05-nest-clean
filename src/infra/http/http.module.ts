@@ -10,15 +10,17 @@ import { CommentOnAnswerUseCase } from '@/domain/forum/app/use-cases/comment-on-
 import { CommentOnQuestionUseCase } from '@/domain/forum/app/use-cases/comment-on-question'
 import { CreateQuestionUseCase } from '@/domain/forum/app/use-cases/create-question'
 import { DeleteAnswerUseCase } from '@/domain/forum/app/use-cases/delete-answer'
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/app/use-cases/delete-answer-comment'
 import { DeleteQuestionUseCase } from '@/domain/forum/app/use-cases/delete-question'
 import { DeleteQuestionCommentUseCase } from '@/domain/forum/app/use-cases/delete-question-comment'
 import { EditAnswerUseCase } from '@/domain/forum/app/use-cases/edit-answer'
 import { EditQuestionUseCase } from '@/domain/forum/app/use-cases/edit-question'
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/app/use-cases/fetch-question-answers'
+import { FetchQuestionCommentsUseCase } from '@/domain/forum/app/use-cases/fetch-question-comments'
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/app/use-cases/fetch-recent-questions'
 import { GetQuestionBySlugUseCase } from '@/domain/forum/app/use-cases/get-question-by-slug'
 import { RegisterStudentUseCase } from '@/domain/forum/app/use-cases/register-student'
-import { DeleteAnswerCommentUseCase } from '@/domain/forum/app/use-cases/delete-answer-comment'
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/app/use-cases/fetch-answer-comments'
 
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { AuthenticateController } from './controllers/authenticate.controller'
@@ -33,7 +35,9 @@ import { DeleteQuestionCommentController } from './controllers/delete-question-c
 import { DeleteQuestionController } from './controllers/delete-question.controller'
 import { EditAnswerController } from './controllers/edit-answer.controller'
 import { EditQuestionController } from './controllers/edit-question.controller'
+import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller'
 import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller'
+import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller'
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller'
 
@@ -56,6 +60,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     DeleteQuestionCommentController,
     CommentOnAnswerController,
     DeleteAnswerCommentController,
+    FetchQuestionCommentsController,
+    FetchAnswerCommentsController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -74,6 +80,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     DeleteQuestionCommentUseCase,
     CommentOnAnswerUseCase,
     DeleteAnswerCommentUseCase,
+    FetchQuestionCommentsUseCase,
+    FetchAnswerCommentsUseCase,
   ],
 })
 export class HttpModule {}
