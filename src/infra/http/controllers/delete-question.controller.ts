@@ -11,7 +11,7 @@ import {
 
 @Controller('/questions/:id')
 export class DeleteQuestionController {
-  constructor(private DeleteQuestion: DeleteQuestionUseCase) {}
+  constructor(private deleteQuestion: DeleteQuestionUseCase) {}
 
   @Delete()
   @HttpCode(204)
@@ -21,7 +21,7 @@ export class DeleteQuestionController {
   ) {
     const { sub: userId } = user
 
-    const result = await this.DeleteQuestion.execute({
+    const result = await this.deleteQuestion.execute({
       questionId,
       authorId: userId,
     })
