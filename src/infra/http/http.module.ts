@@ -12,6 +12,8 @@ import { EditQuestionUseCase } from '@/domain/forum/app/use-cases/edit-question'
 import { DeleteQuestionUseCase } from '@/domain/forum/app/use-cases/delete-question'
 import { AnswerQuestionUseCase } from '@/domain/forum/app/use-cases/answer-question'
 import { EditAnswerUseCase } from '@/domain/forum/app/use-cases/edit-answer'
+import { DeleteAnswerUseCase } from '@/domain/forum/app/use-cases/delete-answer'
+import { FetchQuestionAnswersUseCase } from '@/domain/forum/app/use-cases/fetch-question-answers'
 
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
@@ -22,10 +24,10 @@ import { DeleteQuestionController } from './controllers/delete-question.controll
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { EditAnswerController } from './controllers/edit-answer.controller'
 import { DeleteAnswerController } from './controllers/delete-answer.controller'
-import { DeleteAnswerUseCase } from '@/domain/forum/app/use-cases/delete-answer'
-import { FetchQuestionAnswersUseCase } from '@/domain/forum/app/use-cases/fetch-question-answers'
 import { EditQuestionController } from './controllers/edit-question.controller'
 import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller'
+import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller'
+import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/app/use-cases/choose-question-best-answer'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -41,6 +43,7 @@ import { FetchQuestionAnswersController } from './controllers/fetch-question-ans
     EditAnswerController,
     DeleteAnswerController,
     FetchQuestionAnswersController,
+    ChooseQuestionBestAnswerController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -54,6 +57,7 @@ import { FetchQuestionAnswersController } from './controllers/fetch-question-ans
     EditAnswerUseCase,
     DeleteAnswerUseCase,
     FetchQuestionAnswersUseCase,
+    ChooseQuestionBestAnswerUseCase,
   ],
 })
 export class HttpModule {}
