@@ -18,14 +18,14 @@ import { CreateAccountController } from './controllers/create-account.controller
 import { CreateQuestionController } from './controllers/create-question.controller'
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller'
-import { EditQuestionController } from './controllers/edit-question.cotroller'
 import { DeleteQuestionController } from './controllers/delete-question.controller'
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { EditAnswerController } from './controllers/edit-answer.controller'
 import { DeleteAnswerController } from './controllers/delete-answer.controller'
 import { DeleteAnswerUseCase } from '@/domain/forum/app/use-cases/delete-answer'
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/app/use-cases/fetch-question-answers'
-import { FetchQuestionAnswersController } from './controllers/fetch-question-answers'
+import { EditQuestionController } from './controllers/edit-question.controller'
+import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
