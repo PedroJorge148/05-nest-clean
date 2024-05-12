@@ -45,8 +45,6 @@ export class CreateQuestionUseCase {
 
     question.attachments = new QuestionAttachmentList(questionAttachments)
 
-    // TODO: attachments on question repository
-
     await this.questionsRepository.create(question)
 
     return right({
