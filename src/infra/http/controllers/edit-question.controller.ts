@@ -15,6 +15,7 @@ import { z } from 'zod'
 const EditQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
+  attachments: z.array(z.string().uuid()),
 })
 
 type EditQuestionBodySchema = z.infer<typeof EditQuestionBodySchema>
@@ -32,14 +33,14 @@ export class EditQuestionController {
     @Param('id') questionId: string,
     @CurrentUser() user: UserPayload,
   ) {
-    const { title, content } = body
+    const { title, content, attachments } = body
     const { sub: userId } = user
 
     const result = await this.EditQuestion.execute({
       title,
       content,
       authorId: userId,
-      attachmentsIds: [], // TODO: Edit attachments
+      attachmentsIds: attachments,
       questionId,
     })
 
