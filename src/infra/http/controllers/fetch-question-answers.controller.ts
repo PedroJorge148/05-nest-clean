@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common'
 import { z } from 'zod'
-import { AnswerPresenter } from '../presenters/answer-presenter'
+import { AnswerDetailsPresenter } from '../presenters/answer-details-presenter'
 
 const pageQueryParamSchema = z
   .string()
@@ -41,6 +41,6 @@ export class FetchQuestionAnswersController {
 
     const answers = result.value.answers
 
-    return { answers: answers.map(AnswerPresenter.toHTTP) }
+    return { answers: answers.map(AnswerDetailsPresenter.toHTTP) }
   }
 }

@@ -10,31 +10,45 @@ import { DatabaseModule } from '@/infra/database/database.module'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
 import { AnswerFactory } from 'test/factories/make-answer'
+import { AnswerAttachmentFactory } from 'test/factories/make-answer-attachment'
+import { AttachmentFactory } from 'test/factories/make-attachment'
 
 describe('Fetch question answers (E2E)', () => {
   let app: INestApplication
   let studentFactory: StudentFactory
   let questionFactory: QuestionFactory
   let answerFactory: AnswerFactory
+  let answerAttachmentFactory: AnswerAttachmentFactory
+  let attachmentFactory: AttachmentFactory
   let jwt: JwtService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory],
+      providers: [
+        StudentFactory,
+        QuestionFactory,
+        AnswerFactory,
+        AnswerAttachmentFactory,
+        AttachmentFactory,
+      ],
     }).compile()
 
     app = moduleRef.createNestApplication()
     studentFactory = moduleRef.get(StudentFactory)
     questionFactory = moduleRef.get(QuestionFactory)
     answerFactory = moduleRef.get(AnswerFactory)
+    answerAttachmentFactory = moduleRef.get(AnswerAttachmentFactory)
+    attachmentFactory = moduleRef.get(AttachmentFactory)
     jwt = moduleRef.get(JwtService)
 
     await app.init()
   })
 
   test('[GET] /questions/:questionId/answers', async () => {
-    const user = await studentFactory.makePrismaStudent()
+    const user = await studentFactory.makePrismaStudent({
+      name: 'John Doe',
+    })
 
     const token = jwt.sign({ sub: user.id.toString() })
 
@@ -42,18 +56,26 @@ describe('Fetch question answers (E2E)', () => {
       authorId: user.id,
     })
 
-    await Promise.all([
-      answerFactory.makePrismaAnswer({
-        authorId: user.id,
-        questionId: question.id,
-        content: 'Answer 01',
-      }),
-      answerFactory.makePrismaAnswer({
-        authorId: user.id,
-        questionId: question.id,
-        content: 'Answer 02',
-      }),
-    ])
+    const attachment = await attachmentFactory.makePrismaAttachment({
+      title: 'Some attachment',
+    })
+
+    const answer = await answerFactory.makePrismaAnswer({
+      authorId: user.id,
+      questionId: question.id,
+      content: 'Answer 01',
+    })
+
+    await answerFactory.makePrismaAnswer({
+      authorId: user.id,
+      questionId: question.id,
+      content: 'Answer 02',
+    })
+
+    await answerAttachmentFactory.makePrismaAnswerAttachment({
+      attachmentId: attachment.id,
+      answerId: answer.id,
+    })
 
     const questionId = question.id.toString()
 
@@ -66,8 +88,20 @@ describe('Fetch question answers (E2E)', () => {
 
     expect(response.body).toEqual({
       answers: expect.arrayContaining([
-        expect.objectContaining({ content: 'Answer 01' }),
-        expect.objectContaining({ content: 'Answer 02' }),
+        expect.objectContaining({
+          content: 'Answer 01',
+          author: 'John Doe',
+          attachments: [
+            expect.objectContaining({
+              title: 'Some attachment',
+            }),
+          ],
+        }),
+        expect.objectContaining({
+          content: 'Answer 02',
+          author: 'John Doe',
+          attachments: [],
+        }),
       ]),
     })
   })
