@@ -9,6 +9,11 @@ export abstract class AnswersRepository {
     params: PaginationParams,
   ): Promise<Answer[]>
 
+  // abstract findManyByQuestionIdWithAuthor( // TODO: implement this
+  //   questionId: string,
+  //   params: PaginationParams,
+  // ): Promise<Answer[]>
+
   abstract save(answer: Answer): Promise<void>
   abstract delete(answer: Answer): Promise<void>
 }
