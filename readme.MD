@@ -33,7 +33,7 @@ I decided to use RS256 strategy, so for you generate your private and public key
 
 *Obs.: You'll need to install openssl. The public and private key will be on the txt file.*
 
-**NOTE:** You can get easily the other variables on Cloudflare R2, you just need create a bucket.
+**NOTE:** You can get easily the other variables on Cloudflare R2, you just need create an account and then a bucket.
 
 ## Running
 You can run the local using:
