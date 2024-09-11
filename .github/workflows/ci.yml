@@ -43,4 +43,4 @@ jobs:
         run: docker build -t pedrojorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
 
       - name: Push image
-        run: docker push pedrojorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
+        run: docker push pedrojorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }}
