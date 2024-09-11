@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build docker image
-        run: docker build -t PedroJorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
+        run: docker build -t pedrojorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
 
       - name: Push image
-        run: docker push PedroJorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
+        run: docker push pedrojorge148/05-nest-clean:${{ steps.generate_tag.outputs.sha }} .
