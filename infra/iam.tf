@@ -70,4 +70,6 @@ resource "aws_iam_role" "ecr-role" {
   tags = {
     Iac = "True"
   }
+
+  depends_on = [ aws_iam_openid_connect_provider.oidc-git ]
 }
