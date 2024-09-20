@@ -56,11 +56,13 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           TAG: ${{ steps.generate_tag.outputs.sha }}
         run: |
-          docker build -t $REGISTRY/05-nest-clean:$TAG .
-          docker push $REGISTRY/05-nest-clean:$TAG
+          docker build -t $REGISTRY/nest-clean:$TAG .
+          docker push $REGISTRY/nest-clean:$TAG
       
-      - name: Deploy to App Runner
-        uses: awslabs/amazon-app-runner-deploy@main
+      # - name: Deploy to App Runner
+      #   uses: awslabs/amazon-app-runner-deploy@main
+      #   with:
+      #     service: nest-clean
         
       # - name: Login into the container registry
       #   uses: docker/login-action@v3
