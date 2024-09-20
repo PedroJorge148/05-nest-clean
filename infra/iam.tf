@@ -1,4 +1,4 @@
-resource "aws_iam_openid_connect_provider" "oidc-git-nest-clean" {
+resource "aws_iam_openid_connect_provider" "oidc-git" {
   url = "https://token.actions.githubusercontent.com"
 
   client_id_list = [
@@ -14,8 +14,8 @@ resource "aws_iam_openid_connect_provider" "oidc-git-nest-clean" {
   }
 }
 
-resource "aws_iam_role" "ecr-role-nest-clean" {
-  name = "ecr-role-nest-clean"
+resource "aws_iam_role" "ecr-role" {
+  name = "ecr-role"
 
   assume_role_policy = jsonencode({
     Version : "2012-10-17",
@@ -44,5 +44,10 @@ resource "aws_iam_role" "ecr-role-nest-clean" {
     Iac = "True"
   }
 
-  depends_on = [aws_iam_openid_connect_provider.oidc-git-nest-clean]
+  depends_on = [aws_iam_openid_connect_provider.oidc-git]
+}
+
+output "ecr-role-arn" {
+  value = aws_iam_role.ecr-role.arn
+  sensitive = false
 }
