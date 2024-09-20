@@ -1,4 +1,4 @@
-resource "aws_iam_openid_connect_provider" "oidc-git" {
+resource "aws_iam_openid_connect_provider" "oidc-git-nest-clean" {
   url = "https://token.actions.githubusercontent.com"
 
   client_id_list = [
@@ -14,11 +14,9 @@ resource "aws_iam_openid_connect_provider" "oidc-git" {
   }
 }
 
-resource "aws_iam_role" "ecr-role" {
-  name = "ecr-role"
+resource "aws_iam_role" "ecr-role-nest-clean" {
+  name = "ecr-role-nest-clean"
 
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({
     Version : "2012-10-17",
     Statement : [
@@ -34,7 +32,7 @@ resource "aws_iam_role" "ecr-role" {
               "sts.amazonaws.com"
             ],
             "token.actions.githubusercontent.com:sub" : [
-              "repo:pedrojorge148/05-nest-clean:ref:refs/heads/main"
+              "repo:PedroJorge148/05-nest-clean:ref:refs/heads/main"
             ]
           }
         }
@@ -42,34 +40,9 @@ resource "aws_iam_role" "ecr-role" {
     ]
   })
 
-  # inline_policy {
-  #   name = "ecr-app-permission"
-
-  #   policy = jsonencode({
-  #     Version : "2012-10-17",
-  #     Statement : [
-  #       {
-  #         Sid : "Statement1"
-  #         Action : [
-  #           "ecr:GetDownloadUrlForLayer",
-  #           "ecr:BatchGetImage",
-  #           "ecr:BatchCheckLayerAvailability",
-  #           "ecr:PutImage",
-  #           "ecr:InitiateLayerUpload",
-  #           "ecr:UploadLayerPart",
-  #           "ecr:CompleteLayerUpload",
-  #           "ecr:GetAuthorizationToken",
-  #         ],
-  #         Effect : "Allow",
-  #         Resource : "*"
-  #       }
-  #     ]
-  #   })
-  # }
-
   tags = {
     Iac = "True"
   }
 
-  depends_on = [ aws_iam_openid_connect_provider.oidc-git ]
+  depends_on = [aws_iam_openid_connect_provider.oidc-git-nest-clean]
 }
