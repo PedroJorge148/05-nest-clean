@@ -1,12 +1,12 @@
-# resource "aws_ecr_repository" "nest-clean" {
-#   name = "nest-clean"
-#   image_tag_mutability = "MUTABLE"
+resource "aws_ecr_repository" "nest-clean" {
+  name = "nest-clean"
+  image_tag_mutability = "MUTABLE"
 
-#   image_scanning_configuration {
-#     scan_on_push = true
-#   }
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 
-#   tags = {
-#     Iac = "True"
-#   }
-# }
+  tags = {
+    Iac = "True"
+  }
+}
